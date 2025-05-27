@@ -5,14 +5,14 @@
   "homepage": "https://snyk.io/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Snyk/snyk-todo-list-demo-app/"
+    "url": "git+https://github.com/Snyk/snyk-todo-list-demo-app.git"
   },
   "scripts": {
-    "dev": "NODE_OPTIONS=--openssl-legacy-provider nodemon ./app.js",
-    "start": "NODE_OPTIONS=--openssl-legacy-provider node app.js",
-    "build": "browserify -r jquery > public/js/bundle.js",
-    "cleanup": "mongo express-todo --eval 'db.todos.remove({});'",
-    "test": "snyk test"
+  "dev": "set NODE_OPTIONS=--openssl-legacy-provider && nodemon ./app.js",
+  "start": "set NODE_OPTIONS=--openssl-legacy-provider && node app.js",
+  "build": "browserify -r jquery > public/js/bundle.js",
+  "cleanup": "mongo express-todo --eval \"db.todos.remove({});\"",
+  "test": "snyk test"
   },
   "dependencies": {
     "adm-zip": "0.4.7",
@@ -53,5 +53,14 @@
     "nodemon": "^2.0.7",
     "snyk": "^1.244.0"
   },
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "main": "app.js",
+  "directories": {
+    "test": "tests"
+  },
+  "keywords": [],
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/Snyk/snyk-todo-list-demo-app/issues"
+  }
 }
