@@ -5,7 +5,7 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                 git branch: 'main', url: 'https://github.com/Yashdeep22/jenkins-ci-pipeline-demo.git'
+                 git branch: 'main', url: 'https://github.com/Yashdeep22/8.2CDevSecOps.git'
             }
         }
         stage('Install Dependencies') { 
