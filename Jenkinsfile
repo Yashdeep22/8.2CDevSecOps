@@ -21,7 +21,7 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                bat 'npm test > test-output.log || exit /b 0' // Save output to log
+                bat 'npm test || exit /b 0' // Save output to log
             }
             post {
                 always {
@@ -29,8 +29,6 @@ pipeline {
                         subject: "Jenkins - Test Stage: ${currentBuild.currentResult}",
                         body: "The Test stage has completed with status: ${currentBuild.currentResult}. Please see attached log.",
                         to: "${env.RECIPIENTS}",
-                        attachmentsPattern: 'test-output.log',
-                        compressAttachments: true
                     )
                 }
             }
@@ -44,7 +42,7 @@ pipeline {
 
         stage('NPM Audit (Security Scan)') {
             steps {
-                bat 'npm audit > audit-output.log || exit /b 0'
+                bat 'npm audit|| exit /b 0'
             }
             post {
                 always {
@@ -52,8 +50,6 @@ pipeline {
                         subject: "Jenkins - Security Scan Stage: ${currentBuild.currentResult}",
                         body: "The Security Scan has completed with status: ${currentBuild.currentResult}. Please see attached audit report.",
                         to: "${env.RECIPIENTS}",
-                        attachmentsPattern: 'audit-output.log',
-                        compressAttachments: true
                     )
                 }
             }
