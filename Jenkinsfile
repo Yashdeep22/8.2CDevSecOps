@@ -6,7 +6,7 @@ pipeline {
     }
 
     stages {
-
+        emailext()
         stage('Checkout') {
             steps {
                 git branch: 'main', url: 'https://github.com/Yashdeep22/8.2CDevSecOps.git'
