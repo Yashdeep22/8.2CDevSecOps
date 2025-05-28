@@ -2,11 +2,10 @@ pipeline {
     agent any
 
     environment {
-        RECIPIENTS = 'proyashjaiswal@gmail.com' // Change to your desired email address
+        RECIPIENTS = 'proyashjaiswal@gmail.com' 
     }
 
     stages {
-        emailext()
         stage('Checkout') {
             steps {
                 git branch: 'main', url: 'https://github.com/Yashdeep22/8.2CDevSecOps.git'
@@ -26,14 +25,14 @@ pipeline {
             post {
                 always {
                     emailext (
-                        subject: "Jenkins - Test Stage: ${currentBuild.currentResult}",
-                        body: "The Test stage has completed with status: ${currentBuild.currentResult}. Please see attached log.",
-                        to: "${env.RECIPIENTS}",
+                        subject: "Jenkins - Test Stage: ",
+                        body: "The Test stage has completed with status: . Please see attached log.",
+                        to: "proyashjaiswal@gmail.com",
                     )
                 }
             }
         }
-
+// ${currentBuild.currentResult}  ${currentBuild.currentResult}  ${env.RECIPIENTS}
         stage('Generate Coverage Report') {
             steps {
                 bat 'npm run coverage || exit /b 0'
