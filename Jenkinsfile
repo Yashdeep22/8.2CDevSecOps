@@ -1,7 +1,6 @@
 pipeline {
     agent any
 
-
     stages {
         stage('Checkout') {
             steps {
@@ -17,19 +16,20 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                bat 'npm test || exit /b 0' // Save output to log
+                bat 'npm test || exit /b 0'
             }
             post {
                 always {
                     emailext (
-                        subject: "Jenkins - Test Stage: ",
-                        body: "The Test stage has completed with status.",
+                        subject: "Jenkins - Test Stage",
+                        body: """The Test stage has completed.Check the attached log for more details.""",
                         to: "yashdeepsinghvilkhu@gmail.com",
+                        attachLog: true,
                     )
                 }
             }
         }
-// ${currentBuild.currentResult}  ${currentBuild.currentResult}  ${env.RECIPIENTS}
+
         stage('Generate Coverage Report') {
             steps {
                 bat 'npm run coverage || exit /b 0'
@@ -38,14 +38,15 @@ pipeline {
 
         stage('NPM Audit (Security Scan)') {
             steps {
-                bat 'npm audit|| exit /b 0'
+                bat 'npm audit || exit /b 0'
             }
             post {
                 always {
                     emailext (
-                        subject: "Jenkins - Security Scan Stage: ",
-                        body: "The Scan stage has completed with status.",
+                        subject: "Jenkins - Security Scan Stage",
+                        body: """The Security Scan stage has completed. Check the attached log for more details.""",
                         to: "yashdeepsinghvilkhu@gmail.com",
+                        attachLog: true,
                     )
                 }
             }
