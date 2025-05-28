@@ -1,9 +1,6 @@
 pipeline {
     agent any
 
-    environment {
-        RECIPIENTS = 'yashdeepsinghvilkhu@gmail.com' 
-    }
 
     stages {
         stage('Checkout') {
@@ -26,8 +23,8 @@ pipeline {
                 always {
                     emailext (
                         subject: "Jenkins - Test Stage: ",
-                        body: "The Test stage has completed with status: . Please see attached log.",
-                        to: "proyashjaiswal@gmail.com",
+                        body: "The Test stage has completed with status.",
+                        to: "yashdeepsinghvilkhu@gmail.com",
                     )
                 }
             }
@@ -46,9 +43,9 @@ pipeline {
             post {
                 always {
                     emailext (
-                        subject: "Jenkins - Security Scan Stage: ${currentBuild.currentResult}",
-                        body: "The Security Scan has completed with status: ${currentBuild.currentResult}. Please see attached audit report.",
-                        to: "${env.RECIPIENTS}",
+                        subject: "Jenkins - Security Scan Stage: ",
+                        body: "The Scan stage has completed with status.",
+                        to: "yashdeepsinghvilkhu@gmail.com",
                     )
                 }
             }
